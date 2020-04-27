@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>slider on vue</title>
+</head>
+<body>
+   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <div id="app">
+    <div>
+      <div id="slider">
+        <div class="arrows">
+          <button @click="prevSlide" class="prev-arrow arrow">&#8592;</button>
+          <button @click="nextSlide" class="next-arrow arrow">&#8594;</button>
+        </div>
+         <div class="slide" v-for="(slide, index) in slides"> <img :src=slide.img alt="" v-show="index==currentSlide"><p class="current-slide">{{currentSlide}}</p> </div>`
+      </div>
+    </div>
+  </div>
+
+<style>
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 28px;
+  }
+  #slider{
+    position: relative;
+  }
+  .arrows{
+    position: absolute;
+    width: 90%;
+    left:50%;
+    margin-left: -45%;
+    /*top: 45%;*/
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .arrow{
+    background-color: #fff;
+    padding: 0.9rem;
+    border: none;
+  }
+  .arrow:hover{
+    background-color: #178afc;
+  }
+  .next-arrow{
+    right: 0;
+  }
+  img{
+    display: block;
+    width: 100%;
+  }
+  .current-slide{
+    position: absolute;
+    left: 15px;
+    top: 45px;
+    font-size: 32px;
+    color: #fff;
+    background-color: #123;
+    padding: 0.5rem;
+  }
+</style>
+  
+ 
+  <script src="slider.js">
+  
+  </script>
+</body>
+</html>
