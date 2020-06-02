@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,12 @@
           <button @click="prevSlide" class="prev-arrow arrow">&#8592;</button>
           <button @click="nextSlide" class="next-arrow arrow">&#8594;</button>
         </div>
-         <div class="slide" v-for="(slide, index) in slides"> <img :src=slide.img alt="" v-show="index==currentSlide"><p class="current-slide">{{currentSlide}}</p> </div>`
+        <transition name="slide" >
+           <div class="slide" v-for="(slide, index) in slides" v-if="index==currentSlide">
+              <img :src=slide.img alt="" >
+              <p class="current-slide">{{currentSlide+1}}</p> 
+          </div>`
+        </transition>
       </div>
     </div>
   </div>
@@ -27,13 +32,15 @@
   }
   #slider{
     position: relative;
+    display: flex;  
+    padding: 0;
   }
   .arrows{
     position: absolute;
     width: 90%;
     left:50%;
     margin-left: -45%;
-    /*top: 45%;*/
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     
@@ -45,6 +52,7 @@
   }
   .arrow:hover{
     background-color: #178afc;
+    cursor: pointer;
   }
   .next-arrow{
     right: 0;
@@ -52,6 +60,16 @@
   img{
     display: block;
     width: 100%;
+  }
+  .slide{
+    position: relative;
+    top: 0;
+    margin: 0;
+    padding:0;
+    flex-basis: 100%;
+    flex-shrink: 0;
+
+
   }
   .current-slide{
     position: absolute;
@@ -62,11 +80,21 @@
     background-color: #123;
     padding: 0.5rem;
   }
+  
+.slide-enter-to{
+  transform: translateX(-100%);
+}
+.slide-leave-to{
+  transform: translateX(-100%);
+}
+.slide-enter-active, .slide-leave-active{
+  z-index: 2;
+  transition: transform .45s ease-in-out;
+}
+
 </style>
-  
- 
-  <script src="slider.js">
-  
-  </script>
+
+<script src="slider.js">  
+</script>
 </body>
 </html>
